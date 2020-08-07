@@ -39,10 +39,9 @@ class Layout extends Component {
   }
 }
 
-//Note : if token is true use if authenticated else if token is null user notauthenticated (this is how we used our token)
 const mapStateToProps = (state) => {
   return {
-    isAuthenticated: state.auth.token !== null, //ie. token ==true
+    isAuthenticated: state.auth.token !== null,
   };
 };
 

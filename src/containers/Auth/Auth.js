@@ -44,7 +44,6 @@ class Auth extends Component {
   };
 
   componentDidMount() {
-    //if not building a burger
     if (!this.props.buildingBurger && this.props.authRedirectPath !== "/") {
       this.props.onSetAuthRedirectPath();
     }
@@ -135,7 +134,6 @@ class Auth extends Component {
 
     let errorMessage = null;
     if (this.props.error) {
-      // this .message is only available in firebase ( as we are taking error from response)
       errorMessage = <p>{this.props.error.message}</p>;
     }
 

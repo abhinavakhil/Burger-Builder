@@ -12,17 +12,14 @@ import Logout from "./containers/Auth/Logout/Logout";
 import * as actions from "./store/actions/index";
 
 const asyncCheckout = asyncComponent(() => {
-  // import component we want to load lazily
   return import("./containers/Checkout/Checkout");
 });
 
 const asyncOrders = asyncComponent(() => {
-  // import component we want to load lazily
   return import("./containers/Orders/Orders");
 });
 
 const asyncAuth = asyncComponent(() => {
-  // import component we want to load lazily
   return import("./containers/Auth/Auth");
 });
 

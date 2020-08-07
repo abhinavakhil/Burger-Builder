@@ -4,8 +4,6 @@ import classes from "./Burger.css";
 import BurgerIngredient from "./BurgerIngredient/BurgerIngredient";
 
 const burger = (props) => {
-  // Object.key() method will extract the keys of object and gives us an array
-
   let transformedIngredients = Object.keys(props.ingredients)
     .map((igKey) => {
       // console.log(props.ingredients);
@@ -14,11 +12,9 @@ const burger = (props) => {
       });
     })
     .reduce((arr, el) => {
-      // flatten the array using reduce()
-      return arr.concat(el); // take the elt to which we are lopping and add it to the array(arr)
+      return arr.concat(el);
     }, []);
-  // console.log(transformedIngredients[0]);
-  // if no ingredients show this
+
   if (transformedIngredients.length === 0) {
     transformedIngredients = <p>Please start adding ingredients!</p>;
   }

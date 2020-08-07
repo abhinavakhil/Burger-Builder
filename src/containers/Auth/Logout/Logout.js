@@ -10,7 +10,6 @@ class Logout extends Component {
   }
 
   render() {
-    // means whenevre this component loads simply redirect me
     return <Redirect to="/" />;
   }
 }

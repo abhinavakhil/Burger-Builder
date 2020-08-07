@@ -1,6 +1,6 @@
 import * as actionTypes from "./actionTypes";
 import axios from "../../axios-orders";
-// synchronous actioncreater
+
 export const purchaseBurgerSuccess = (id, orderData) => {
   return {
     type: actionTypes.PURCHASE_BURGER_SUCCESS,
@@ -22,28 +22,22 @@ export const purchaseBurgerStart = () => {
   };
 };
 
-//async actionCreators
 export const purchaseBurger = (orderData, token) => {
   return (dispatch) => {
     dispatch(purchaseBurgerStart());
-    // this below is from orderHandler in contactData.js
+
     axios
       .post("/orders.json?auth=" + token, orderData)
       .then((response) => {
-        //instead of this
-        // this.setState({ loading: false });
-        // this.props.history.push("/");
         dispatch(purchaseBurgerSuccess(response.data.name, orderData));
       })
       .catch((error) => {
-        // this.setState({ loading: false });
         dispatch(purchaseBurgerFail(error));
       });
   };
 };
 
 export const purchaseInit = () => {
-  // just return an action
   return {
     type: actionTypes.PURCHASE_INIT,
   };
@@ -70,7 +64,6 @@ export const fetchOrdersStart = () => {
 };
 
 export const fetchOrders = (token, userId) => {
-  // got the axios code from containers->orders.js , componentDidMount
   return (dispatch) => {
     dispatch(fetchOrdersStart());
     const queryParams =
@@ -86,11 +79,10 @@ export const fetchOrders = (token, userId) => {
             id: key,
           });
         }
-        // this.setState({ loading: false, orders: fetchedOrders });
+
         dispatch(fetchOrdersSuccess(fetchedOrders));
       })
       .catch((err) => {
-        // this.setState({ loading: false });
         dispatch(fetchOrdersFail(err));
       });
   };

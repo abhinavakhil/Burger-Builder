@@ -4,7 +4,6 @@ import * as actionTypes from "./actionTypes";
 export const authStart = () => {
   return {
     type: actionTypes.AUTH_START,
-    // we are not passing any payload here
   };
 };
 
@@ -36,18 +35,17 @@ export const checkAuthTimeout = (expirationTime) => {
   return (dispatch) => {
     setTimeout(() => {
       dispatch(logout());
-    }, expirationTime * 1000); //expirationTime*1000 ,converting millisecond to sec
+    }, expirationTime * 1000);
   };
 };
 
 export const auth = (email, password, isSignup) => {
-  // dispatch will work only when we have redux thunk in indesx.js
   return (dispatch) => {
     dispatch(authStart());
     const authData = {
       email: email,
       password: password,
-      returnSecureToken: true, //this should be true always
+      returnSecureToken: true,
     };
     // signup url
     let url =
@@ -66,7 +64,7 @@ export const auth = (email, password, isSignup) => {
           new Date().getTime() + response.data.expiresIn * 1000
         );
         localStorage.setItem("token", response.data.idToken);
-        // token alone would not be so useful , we also need to know when it expires
+
         localStorage.setItem("expirationDate", expirationDate);
         localStorage.setItem("userId", response.data.localId);
         dispatch(authSuccess(response.data.idToken, response.data.localId));
@@ -92,13 +90,12 @@ export const authCheckState = () => {
     if (!token) {
       dispatch(logout());
     } else {
-      // converting string to date using new Date
       const expirationDate = new Date(localStorage.getItem("expirationDate"));
       if (expirationDate <= new Date()) {
         dispatch(logout());
       } else {
         const userId = localStorage.getItem("userId");
-        dispatch(authSuccess(token, userId)); // login
+        dispatch(authSuccess(token, userId));
         dispatch(
           checkAuthTimeout(
             (expirationDate.getTime() - new Date().getTime()) / 1000 // difference is expiry time
